@@ -1,3 +1,7 @@
+# csv-joiner
+
+Mini application to join two csv files by a column in common, using python and user-friendly interface for windows
+
 ## Como Instalar e Executar
 
 ### Pré-requisitos
@@ -23,7 +27,8 @@
 3. Instale as dependências:
 
    ```sh
-   pip setup.py install
+    pip install setuptools
+   python setup.py install
 
    ```
 
