@@ -1,6 +1,9 @@
-# main.py
-# Arquivo principal para iniciar a interface gráfica
-from ui import launch_ui
+import customtkinter as ctk
+
+from gui import CSVJoinerApp
 
 if __name__ == "__main__":
-    launch_ui()
+    ctk.set_appearance_mode("dark")  # Modo escuro
+    ctk.set_default_color_theme("blue")  # Tema azul
+    app = CSVJoinerApp()
+    app.mainloop()

@@ -1,53 +1,103 @@
-# csv-joiner
+# Juntador de Arquivos do Ney
 
-Mini application to join two csv files by a column in common, using python and user-friendly interface for windows
+A motivação para criar esse projeto foi por conta de uma necessidade que meu pai tem no trabalho. Basicamente ele precisa realizar a unificação entre dois CSVs a partir de uma chave em comum e gerar um terceiro CSV com o resultado da unificação. Anteriormente eu tinha criado um script simples em python e o ensinei a usá-lo, porém só funcionava no ambiente que configurei para ele. Por isso criei esse projeto, para facilitar a tarefa de unificação dos arquivos.
 
-## Como Instalar e Executar
+## Índice
 
-### Pré-requisitos
+- [Juntador de Arquivos do Ney](#juntador-de-arquivos-do-ney)
+  - [Índice](#índice)
+  - [Recursos](#recursos)
+  - [Requisitos](#requisitos)
+  - [Instalação](#instalação)
+  - [Uso](#uso)
+  - [Criação de Executável](#criação-de-executável)
+    - [Para criar o executável:](#para-criar-o-executável)
+  - [Estrutura do Código](#estrutura-do-código)
+    - [`main.py`](#mainpy)
+    - [`gui.py`](#guipy)
+    - [`joiner.py`](#joinerpy)
 
-- Python 3.x
+## Recursos
 
-### Passos
+- Seleção de dois arquivos CSV.
+- Identificação automática de colunas comuns entre os arquivos.
+- Realização do join com base em uma coluna selecionada.
+- Salvamento do resultado em um novo arquivo CSV.
 
-1. Clone o repositório:
+## Requisitos
 
-   ```sh
-   git clone https://github.com/seu-usuario/CSVJoiner.git
-   cd CSVJoiner
+Certifique-se de ter o Python 3 instalado em sua máquina.
+
+## Instalação
+
+1. Clone este repositório:
+
+   ```bash
+   git clone https://github.com/BRAN2K/csv-joiner.git
+   cd csv-joiner
    ```
 
-2. Crie e ative um ambiente virtual:
-
-   ```sh
-   python -m venv venv
-   source venv/bin/activate  # No Windows use: venv\Scripts\activate
+2. Instale as dependências necessárias com o arquivo `requirements.txt`:
+   ```bash
+   pip install -r requirements.txt
    ```
 
-3. Instale as dependências:
+## Uso
 
-   ```sh
-    pip install setuptools
-   python setup.py install
+1. Execute o aplicativo diretamente no terminal:
 
+   ```bash
+   python src/main.pyw
    ```
 
-4. Execute a aplicação:
-   ```sh
-   python src/main.py
-   ```
+2. Na interface, clique no botão "Selecione o arquivo 1" e escolha o primeiro arquivo CSV.
 
-### Gerar o Executável
+3. Clique no botão "Selecione o arquivo 2" e escolha o segundo arquivo CSV.
 
-1. Instale o `pyinstaller`:
+4. Selecione a coluna que será usada para juntar os arquivos no menu suspenso.
 
-   ```sh
+5. Clique no botão "Juntar!" e escolha um diretório para salvar o arquivo resultante.
+
+6. O resultado será salvo como `resultado.csv` no diretório escolhido.
+
+## Criação de Executável
+
+Este projeto pode ser transformado em um executável, permitindo que você execute o aplicativo sem a necessidade de compilar o código toda vez. O processo de build foi testado e está disponível apenas para Windows.
+
+### Para criar o executável:
+
+1. Certifique-se de ter o `PyInstaller` instalado. Se não estiver, instale-o com:
+
+   ```bash
    pip install pyinstaller
    ```
 
-2. Gere o executável:
-   ```sh
-   pyinstaller --onefile --windowed src/main.py
+2. Navegue até a pasta raiz do projeto.
+
+3. Execute o seguinte comando:
+
+   ```bash
+   pyinstaller -F src/main.pyw --collect-all customtkinter -w
    ```
 
-O executável será criado na pasta `dist`.
+   - `-F` gera um único arquivo executável.
+   - `--collect-all customtkinter` garante que todos os recursos da biblioteca `customtkinter` sejam incluídos.
+   - `-w` inicia a aplicação sem abrir uma janela de console.
+
+4. O executável será gerado na pasta `dist`. Você pode executar o arquivo gerado diretamente.
+
+## Estrutura do Código
+
+O código é dividido em quatro arquivos principais:
+
+### `main.py`
+
+- Inicializa a aplicação e define o tema e modo de aparência da interface. A interface gráfica é baseada na biblioteca `customtkinter`.
+
+### `gui.py`
+
+- Contém a classe `CSVJoinerApp`, que define a interface gráfica, widgets (componentes) e a lógica de interação com o usuário.
+
+### `joiner.py`
+
+- Contém a função `join_csv_files`, que executa o merge dos DataFrames do pandas com base na coluna selecionada.
