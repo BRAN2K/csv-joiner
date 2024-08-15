@@ -3,7 +3,7 @@ import customtkinter as ctk
 import pandas as pd
 
 from tkinter import filedialog, messagebox
-from joiner import join_csv_files
+from joiner import join_csv_files, read_csv
 
 class CSVJoinerApp(ctk.CTk):
     def __init__(self):
@@ -80,8 +80,8 @@ class CSVJoinerApp(ctk.CTk):
 
     def update_common_keys(self):
         if self.file1 and self.file2:
-            df1 = pd.read_csv(self.file1, nrows=0)
-            df2 = pd.read_csv(self.file2, nrows=0)
+            df1 = read_csv(self.file1)
+            df2 = read_csv(self.file2)            
             common_keys = list(set(df1.columns).intersection(df2.columns))
             if common_keys:
                 self.column_optionmenu.configure(values=common_keys)
@@ -105,8 +105,8 @@ class CSVJoinerApp(ctk.CTk):
             messagebox.showerror("Erro", "Selecione a coluna para o join")
             return
 
-        df1 = pd.read_csv(self.file1)
-        df2 = pd.read_csv(self.file2)
+        df1 = read_csv(self.file1)
+        df2 = read_csv(self.file2)
 
         if join_column not in df1.columns or join_column not in df2.columns:
             messagebox.showerror("Erro", f"A coluna '{join_column}' não existe em um dos arquivos")
